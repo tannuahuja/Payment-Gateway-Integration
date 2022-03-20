@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/pay.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="css/contact.css">
+    <title>Pay Now</title>
+</head>
+<body>
+   <header>
+       <h1>Pay Now</h1>
+       <a href="index.html" target="_blank">Home</a>
+       <div class="left-side">
+       <img src="images/first.jpg" alt="">
+       <p>Lorem ipsum dolor,. At suscipit exercitationem, quasi sed in tenetur recusandae voluptatum iste accusantium fugiat iusto ipsum quibusdam, labore id? Rerum alias, saepe eos consectetur quis at excepturi, omnis, consequatur laboriosam voluptas voluptatum provident eum similique illum amet quae et nam labore ex praesentium natus perferendis. Delectus, magni voluptatum! Error pariatur optio rerum qui. Nisi explicabo distinctio ullam ut suscipit illo neque iure similique ipsam.</p>
+    </div>
+    <div id="verticle-line"></div>
+    <div class="right-side">
+        <h2>Contact Form</h2>
+        <form action="" method="post">
+            <label for="name">Name :</label>
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" size="38"><br><br>
+
+            <label for="email">Email :</label>
+            <input type="email" name="email" placeholder="abc@gmail.com"><br><br>
+
+            <label for="contact">Contact : </label>
+            <input type="number" name="number" placeholder="Enter valid number"><br><br>
+            
+            <label for="comment">Message: </label><br>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <textarea name="comment" rows="6" cols="29"> Enter your message here...</textarea><br><br> 
+            
+            
+            <button id="rzp-button1">Pay Now</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_Ygvag6l1dxIORO", // Enter the Key ID generated from the Dashboard
+    "amount": "500", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Donate",
+    "description": "Donate For Girl Child",
+    "image": "https://example.com/your_logo",
+    "order_id": "order_IjkgtBjE52nh3c", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "theme": {
+        "color": "#dc143c"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+          </form>
+    </div>
+   </header>
+</body>
+</html>
